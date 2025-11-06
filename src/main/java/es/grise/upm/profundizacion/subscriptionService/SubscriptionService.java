@@ -6,13 +6,11 @@ import java.util.Collection;
 public class SubscriptionService {
 
 	private Collection <User> subscribers;
-	private Delivery delivery;
 	
 	/*
 	 * Constructor
 	 */
-	public SubscriptionService(Delivery delivery) {
-        this.delivery = delivery;
+	public SubscriptionService() {
         this.subscribers = new ArrayList<>();
     }
 
@@ -28,11 +26,11 @@ public class SubscriptionService {
             throw new IllegalArgumentException("Error: user already exists");
 		}
 
-        if (user.getDelivery() == Delivery.LOCAL && user.getEmail() == null){
+        if (user.getDelivery() == Delivery.LOCAL && user.getEmail() != null){
             throw new LocalUserDoesNotHaveNullMailException("Local user must have null email");
 		}
-		
-		else subscribers.add(user);
+
+		subscribers.add(user);
 	}
 	
 	/*
